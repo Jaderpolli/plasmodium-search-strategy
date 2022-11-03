@@ -1,16 +1,14 @@
 # Running Hurst and k-means in Julia
 
-The present README file contains the instructions to run the codes in this folder, to obtain the *hurst exponent* and the *k-means clustering*.
-The hurst exponent used in the paper was calculated in Python (see **citar pasta**), but here it is also calculated separatelly in Julia, with the same qualitative results.
+The present README file contains the instructions to run the codes in this folder, to obtain the *k-means clustering*.
 
 ## Folders and organization
 
 This folder contains the following subfolders:
 
 - raw-data: containing the raw-data used for analysis;
-- src: containing the Julia modified modules for Hurst and K-means;
+- src: containing the Julia modified modules for K-means;
 - examples: containing the codes for analysing the raw-data/ files. In this subfolder, three other folders are created when running the codes inside:
-    - results-hurst;
     - results-k-means;
     - results-msd;
 
@@ -33,20 +31,6 @@ Then, the following packages must be installed:
 - Clustering
 
 To install a package, simply run `import Pkg; Pkg.add("PackageName")`
-
-## Running Hurst
-
-To reproduce the Hurst exponent results in Julia, open Julia in this main folder, then run
-
-`include("examples-hurst.jl")`
-
-and a subfolder `examples/results-hurst` will be created with the results inside.
-
-Subfolder `examples/results-hurst/all` contains the individual hurst exponent for each plasmodium.
-
-Subfolder `examples/results-hurst/mean` contains the mean hurst exponent calculated over all individual plasmodium.
-
-Subfolder `examples/results-hurst/mean-type` contains the mean hurst exponent of invaders and non-invaders plasmodium separately.
 
 ## Running k-means
 
