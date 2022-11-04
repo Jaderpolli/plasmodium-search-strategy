@@ -8,7 +8,7 @@ This folder contains the following subfolders:
 
 - raw-data: containing the raw-data used for analysis;
 - src: containing the Julia modified modules for K-means;
-- examples: containing the codes for analysing the raw-data/ files. In this subfolder, three other folders are created when running the codes inside:
+- examples: containing the codes for analysing the raw-data/ files. In this subfolder, two other folders are created when running the codes inside:
     - results-k-means;
     - results-msd;
 
@@ -18,7 +18,7 @@ Now, let's see how to run everything and reproduce the results.
 
 All codes are written in [Julia Language](https://julialang.org/).
 
-Hence, in order to run everything, you must [Download](https://julialang.org/downloads/) and install properly the current stable release (in our analysis, it was used v1.7.2 -- see https://julialang.org/downloads/oldreleases/).
+Hence, in order to run everything, you must [Download](https://julialang.org/downloads/) and install properly the current stable release (in our analysis, it was used v1.7.2 -- see [older releases](https://julialang.org/downloads/oldreleases/).
 
 After installing Julia (and add to `PATH`), you can open Julia simply by typing `julia` in the terminal.
 Then, the following packages must be installed:

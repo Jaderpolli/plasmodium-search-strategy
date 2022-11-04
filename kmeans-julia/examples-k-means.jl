@@ -5,11 +5,11 @@ using DataFrames
 using CurveFit
 using Clustering
 
-include("../src/k-means.jl")
+include("k-means.jl")
 
 function kmeans_example()
-    mkpath("examples/results-k-means")
-    mkpath("examples/results-msd")
+    mkpath("results-k-means")
+    mkpath("results-msd")
     types = ["INV" "NINV"]
     movies = ["20180206","20180216", "20180801", "20180813"]
     INVmoviesFirstParasite = [1, 10, 18, 25, 28]
@@ -34,7 +34,7 @@ function kmeans_example()
                 max_t_window = round(Int64,length(datax)/2)
                 t_step = 4
                 msdt = KMeans.meansquare(datax, datay, max_t_window, t_step)
-                writedlm("examples/results-msd/msd_$(type)$(k)_$(movie).csv", msdt, ',', header = true)
+                writedlm("results-msd/msd_$(type)$(k)_$(movie).csv", msdt, ',', header = true)
                 α = KMeans.alpha(datax, datay, max_t_window, t_step)
                 αs = vcat(αs,α)
                 l += 1
@@ -44,7 +44,7 @@ function kmeans_example()
         data = ["α" "Cluster"]
         data1 = hcat(αs, R.assignments)
         data = vcat(data, data1)
-        writedlm("examples/results-k-means/k-means_$(type).csv", data, ',', header = true)
+        writedlm("results-k-means/k-means_$(type).csv", data, ',', header = true)
     end
 end
 
