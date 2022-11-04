@@ -1,24 +1,16 @@
-# Running Hurst and k-means in Julia
+# Running k-means in Julia
 
 The present README file contains the instructions to run the codes in this folder, to obtain the *k-means clustering*.
 
-## Folders and organization
+## System requirements
 
-This folder contains the following subfolders:
-
-- raw-data: containing the raw-data used for analysis;
-- src: containing the Julia modified modules for K-means;
-- examples: containing the codes for analysing the raw-data/ files. In this subfolder, two other folders are created when running the codes inside:
-    - results-k-means;
-    - results-msd;
-
-Now, let's see how to run everything and reproduce the results.
-
-## Julia and package instalation
+The codes were tested in Windows 10, but, after the proper packages installation - see next section - one should be able to run it either on Linux or Mac.
 
 All codes are written in [Julia Language](https://julialang.org/).
 
-Hence, in order to run everything, you must [Download](https://julialang.org/downloads/) and install properly the current stable release (in our analysis, it was used v1.7.2 -- see [older releases](https://julialang.org/downloads/oldreleases/).
+In order to run everything, you must [Download](https://julialang.org/downloads/) and install properly the current stable release (in our analysis, it was used v1.7.2 -- see [older releases](https://julialang.org/downloads/oldreleases/).
+
+## Julia and package instalation
 
 After installing Julia (and add to `PATH`), you can open Julia simply by typing `julia` in the terminal.
 Then, the following packages must be installed:
@@ -30,14 +22,20 @@ Then, the following packages must be installed:
 - CurveFit
 - Clustering
 
-To install a package, simply run `import Pkg; Pkg.add("PackageName")`
+To install a package, simply run `import Pkg; Pkg.add("PackageName")`.
 
-## Running k-means
+The installation time must not exceed 5 to 10 minutes, depending on the internet conection and how many packages must be manually installed.
+
+## Running k-means and expected output
 
 To reproduce the k-means clustering, open Julia in this main folder, then run
 
 `include("examples-k-means.jl")`
 
-A subfolder `results-msd` will be created, with the mean squared displacement as a function of time for each plasmodium used to obtain the α exponent to be clustered.
+A subfolder `msd-results` will be created, with the mean squared displacement as a function of time for each plasmodium used to obtain the α exponent to be clustered.
 
-Finally, the subfolder `results-k-means` will be created with the results of the clustering inside for invadors and non-invadors.
+Finally, the subfolder `k-means-results` will be created with the results of the clustering inside for invadors and non-invadors.
+
+The expected outputs are already on `expected-msd-results` and `expected-k-means-results` folders.
+
+The expected run time for the demo should not surpasse one minute of running in any modern computer with the correct packages and versions properly installed.

@@ -8,8 +8,8 @@ using Clustering
 include("k-means.jl")
 
 function kmeans_example()
-    mkpath("results-k-means")
-    mkpath("results-msd")
+    mkpath("msd-results")
+    mkpath("k-means-results")
     types = ["INV" "NINV"]
     movies = ["20180206","20180216", "20180801", "20180813"]
     INVmoviesFirstParasite = [1, 10, 18, 25, 28]
@@ -34,17 +34,22 @@ function kmeans_example()
                 max_t_window = round(Int64,length(datax)/2)
                 t_step = 4
                 msdt = KMeans.meansquare(datax, datay, max_t_window, t_step)
-                writedlm("results-msd/msd_$(type)$(k)_$(movie).csv", msdt, ',', header = true)
+                writedlm("msd-results/msd_$(type)$(k)_$(movie).csv", msdt, ',', header = true)
                 α = KMeans.alpha(datax, datay, max_t_window, t_step)
                 αs = vcat(αs,α)
                 l += 1
             end
         end
         R = kmeans(transpose(αs), 3)
-        data = ["α" "Cluster"]
-        data1 = hcat(αs, R.assignments)
+        data = ["ID" "α" "Cluster"]
+        if type == "INV"
+            IDS = 1:1:27
+        else
+            IDS = 1:1:87
+        end
+        data1 = [IDS αs R.assignments]
         data = vcat(data, data1)
-        writedlm("results-k-means/k-means_$(type).csv", data, ',', header = true)
+        writedlm("k-means-results/k-means_$(type).csv", data, ',', header = true)
     end
 end
 
