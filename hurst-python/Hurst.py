@@ -94,10 +94,3 @@ with open('RESULTS.csv', 'w', encoding='UTF8', newline='') as result:
     for l in range(len(hurst_medio)):
         resultado.append(hurst_medio[l])
     writer.writerow(resultado)
-
-plt.plot(t,hurst_medio,lw=0.2, alpha=0.8, label="treshhold=0\u03BCm/s", marker = 'o') #and finally, plot the graph.
-plt.xlabel('time window')
-plt.ylabel('Hurst coefficient')
-plt.ylim(0.2,0.8)
-plt.legend(loc='upper center')
-plt.show()
