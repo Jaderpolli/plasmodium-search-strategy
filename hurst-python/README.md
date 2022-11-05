@@ -21,7 +21,11 @@ To run the software, one must install the Python Packages listed bellow. Make su
 - `pyplot`
 - `scipy`
 
-Follow the [Python Packaging User Guide](https://packaging.python.org/en/latest/tutorials/installing-packages/) if you have any missing package. The `pip` package manager manager is recommended. See the [pip docs](https://pip.pypa.io/en/latest/) for more details.
+Follow the [Python Packaging User Guide](https://packaging.python.org/en/latest/tutorials/installing-packages/) if you have any missing package. The `pip` package manager manager is recommended, and one can insatll the packages by
+
+`pip install package_name`
+
+See the [pip docs](https://pip.pypa.io/en/latest/) for more details.
 
 The install time will generally depend on your internet conection and computer hardware, but should not exceed 5 to 10 minutes depending on how many of the above packages must be installed manually.
 
