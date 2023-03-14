@@ -10,8 +10,8 @@ using Plots
 include("k-means.jl")
 
 function kmeans_example()
-    #mkpath("msd-results")
-    #mkpath("k-means-results")
+    mkpath("kmeans-julia/expected-msd-results")
+    mkpath("kmeans-julia/expected-k-means-results")
     types = ["INV" "NINV"]
     for type in types
         αs = Float64[]
