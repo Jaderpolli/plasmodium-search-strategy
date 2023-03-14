@@ -31,9 +31,16 @@ using Clustering
             msdt = vcat(msdt, meansd)
         end
         t = range(t_step, t_step*max_t_window, length = max_t_window)
-        data = ["t" "MSD"]
-        data1 = hcat(t, msdt)
-        data = vcat(data, data1)
+        data = hcat(t, msdt)
         return(data)
+    end
+
+    function hurst(msd, t_step)
+        H = []
+        for i in 2:length(msd)
+            Hi = 0.5*(log10(msd[i])-log10(msd[i-1]))/(log10((i)*t_step)-log10((i-1)*t_step))
+            H = vcat(H, Hi)
+        end
+        return(H)
     end
 end
