@@ -39,7 +39,7 @@ function kmeans_example()
     end
 end
 
-#kmeans_example()
+kmeans_example()
 
 function juntar_msd()
     types = ["INV", "NINV"]
@@ -96,6 +96,6 @@ function plot_msd()
     end
 end
 
-plot_msd()
+#plot_msd()
 
 #hurst_example()
