@@ -27,11 +27,11 @@ In the first run, you'll have to sellect a CRAN mirror for the section. Select t
 
 ## Demo
 
-To run and reproduce the results of the HMM, simply run the `hmm.r` code.
-This will create the `invader-hmm-states-results.csv` and `non-invader-hmm-states-results.csv` archives, where the informations on the movement state performed by each sporozoite at each time step is recorded.
+To run and reproduce the results of the HMM, simply run the `hmm_ninv.r` and `hmm_inv.r` codes.
+This will create the results where the information on the movement state performed by each sporozoite at each time step is recorded.
 
-To run and reproduce the levy power law results, run the `levy-power-law.r` code.
-This will generate the reproduction of figures 2(b-d).
+To run and reproduce the levy power law results, run the `model_fit_ninv.r` and `model_fit_inv.r` codes.
+This will generate the reproduction of figures 2(c-f).
 
 
 ## Reproduction instructions
