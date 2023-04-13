@@ -158,26 +158,49 @@ tt.pl <- conpl$new(all.steps.invaders1[all.steps.invaders1>0])
 tt.xmin <- estimate_xmin(tt.pl)
 tt.pl$setXmin(tt.xmin)
 data.pl <- data.frame(l = tt.pl$dat, P = tt.pl$internal$cum_n/length(tt.pl$dat))
-write.csv(data.pl, "invaders1_power_law_old.csv")
-results.pl <- data.frame(mu2 = num2str(tt.pl$pars-1), xmin2 = num2str(tt.pl$xmin), total_steps2 = num2str(length(all.steps.invaders1)))
-write.csv(results.pl, "invaders1_power_law_results_old.csv")
+write.csv(data.pl, "power_law_invaders_st1.csv")
 
 tt.pl <- conpl$new(all.steps.invaders2[all.steps.invaders2>0])
 tt.xmin <- estimate_xmin(tt.pl)
 tt.pl$setXmin(tt.xmin)
 data.pl <- data.frame(l = tt.pl$dat, P = tt.pl$internal$cum_n/length(tt.pl$dat))
-write.csv(data.pl, "invaders2_power_law_old.csv")
-results.pl <- data.frame(mu2 = num2str(tt.pl$pars-1), xmin2 = num2str(tt.pl$xmin), total_steps2 = num2str(length(all.steps.invaders2)))
-write.csv(results.pl, "invaders2_power_law_results_old.csv")
+write.csv(data.pl, "power_law_invaders_st2.csv")
 dev.off()
 
-all.steps.invaders <- c(all.steps.invaders1, all.steps.invaders2)
-length(all.steps.invaders)
+all.steps.invaders <- c()
+
+for (parasite in unique(data_invader$ID))
+{
+peaks.x <- findPeaks(data_invader$x[data_invader$ID == parasite]) - 1
+peaks.y <- findPeaks(data_invader$y[data_invader$ID == parasite]) - 1
+valleys.x <- findValleys(data_invader$x[data_invader$ID == parasite]) - 1
+valleys.y <- findValleys(data_invader$y[data_invader$ID == parasite]) - 1
+peaks.x <- sort(c(peaks.x, valleys.x), decreasing = FALSE)
+peaks.y <- sort(c(peaks.y, valleys.y), decreasing = FALSE)
+step.data_invader.x <- replicate(length(peaks.x) - 1, 0)
+step.data_invader.y <- replicate(length(peaks.y) - 1, 0)
+StepX.ind <- data_invader$StepX[data_invader$ID == parasite]
+StepY.ind <- data_invader$StepY[data_invader$ID == parasite]
+Cluster.ind <- as.numeric(data_invader$State[data_invader$ID == parasite])
+for(ind in c(1:(length(peaks.x) - 1)))
+{
+step.data_invader.x[ind] = sum(StepX.ind[peaks.x[ind]:peaks.x[ind + 1]], na.rm=TRUE)
+}
+for(ind in c(1:(length(peaks.y) - 1)))
+{
+step.data_invader.y[ind] = sum(StepY.ind[peaks.y[ind]:peaks.y[ind + 1]], na.rm=TRUE)
+}
+
+combined_steps <- c(step.data_invader.x, step.data_invader.y)
+combined_steps <- combined_steps[combined_steps > 0]
+
+all.steps.invaders <- append(all.steps.invaders, combined_steps)
+}
+
+write.csv(all.steps.invaders, "all_steps_invaders_st1_st2.csv")
 
 tt.pl <- conpl$new(all.steps.invaders)
 tt.xmin <- estimate_xmin(tt.pl)
 tt.pl$setXmin(tt.xmin)
 data.pl <- data.frame(l = tt.pl$dat, P = tt.pl$internal$cum_n/length(tt.pl$dat))
-write.csv(data.pl, "invaders_power_law_old.csv")
-results.pl <- data.frame(mu2 = num2str(tt.pl$pars-1), xmin2 = num2str(tt.pl$xmin), total_steps2 = num2str(length(all.steps.invaders)))
-write.csv(results.pl, "invaders_power_law_results_old.csv")
+write.csv(data.pl, "power_law_invaders_st1_st2.csv")

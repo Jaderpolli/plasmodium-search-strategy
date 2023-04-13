@@ -178,32 +178,55 @@ all.steps.non.invaders1 <- append(all.steps.non.invaders1, combined_steps1)
 all.steps.non.invaders2 <- append(all.steps.non.invaders2, combined_steps2)
 }
 
-write.csv(all.steps.non.invaders1, "all_steps_non_invaders1_newold.csv")
-write.csv(all.steps.non.invaders2, "all_steps_non_invaders2_newold.csv")
+write.csv(all.steps.non.invaders1, "all_steps_non_invaders1.csv")
+write.csv(all.steps.non.invaders2, "all_steps_non_invaders2.csv")
 
 tt.pl <- conpl$new(all.steps.non.invaders1[all.steps.non.invaders1>0])
 tt.xmin <- estimate_xmin(tt.pl)
 tt.pl$setXmin(tt.xmin)
 data.pl <- data.frame(l = tt.pl$dat, P = tt.pl$internal$cum_n/length(tt.pl$dat))
-write.csv(data.pl, "non-invaders1_power_law_newold.csv")
-results.pl <- data.frame(mu2 = num2str(tt.pl$pars-1), xmin2 = num2str(tt.pl$xmin), total_steps2 = num2str(length(all.steps.non.invaders1)))
-write.csv(results.pl, "non-invaders1_power_law_results_newold.csv")
+write.csv(data.pl, "power_law_non-invaders_st1.csv")
 
 tt.pl <- conpl$new(all.steps.non.invaders2[all.steps.non.invaders2>0])
 tt.xmin <- estimate_xmin(tt.pl)
 tt.pl$setXmin(tt.xmin)
 data.pl <- data.frame(l = tt.pl$dat, P = tt.pl$internal$cum_n/length(tt.pl$dat))
-write.csv(data.pl, "non-invaders2_power_law_newold.csv")
-results.pl <- data.frame(mu2 = num2str(tt.pl$pars-1), xmin2 = num2str(tt.pl$xmin), total_steps2 = num2str(length(all.steps.non.invaders2)))
-write.csv(results.pl, "non-invaders2_power_law_results_newold.csv")
+write.csv(data.pl, "power_law_non-invaders_st2.csv")
 
-all.steps.non.invaders <- c(all.steps.non.invaders1, all.steps.non.invaders2)
+all.steps.non.invaders <- c()
 
-tt.pl <- conpl$new(all.steps.non.invaders)
-tt.xmin <- estimate_xmin(tt.pl)
-tt.pl$setXmin(tt.xmin)
-data.pl <- data.frame(l = tt.pl$dat, P = tt.pl$internal$cum_n/length(tt.pl$dat))
-write.csv(data.pl, "non_invaders_power_law_newold.csv")
-results.pl <- data.frame(mu2 = num2str(tt.pl$pars-1), xmin2 = num2str(tt.pl$xmin), total_steps2 = num2str(length(all.steps.non.invaders)))
+for(parasite in unique(data_non_invader$ID))
+{
+peaks.x <- findPeaks(data_non_invader$x[data_non_invader$ID == parasite]) - 1
+peaks.y <- findPeaks(data_non_invader$y[data_non_invader$ID == parasite]) - 1
+valleys.x <- findValleys(data_non_invader$x[data_non_invader$ID == parasite]) - 1
+valleys.y <- findValleys(data_non_invader$y[data_non_invader$ID == parasite]) - 1
+peaks.x <- sort(c(peaks.x, valleys.x), decreasing = FALSE)
+peaks.y <- sort(c(peaks.y, valleys.y), decreasing = FALSE)
+step.data_non_invader.x <- replicate(length(peaks.x) - 1, 0)
+step.data_non_invader.y <- replicate(length(peaks.y) - 1, 0)
+StepX.ind <- data_non_invader$StepX[data_non_invader$ID == parasite]
+StepY.ind <- data_non_invader$StepY[data_non_invader$ID == parasite]
+Cluster.ind <- as.numeric(data_non_invader$State[data_non_invader$ID == parasite])
+for(ind in c(1:(length(peaks.x) - 1)))
+{
+step.data_non_invader.x[ind] = sum(StepX.ind[peaks.x[ind]:peaks.x[ind + 1]], na.rm=TRUE)
+}
+for(ind in c(1:(length(peaks.y) - 1)))
+{
+step.data_non_invader.y[ind] = sum(StepY.ind[peaks.y[ind]:peaks.y[ind + 1]], na.rm=TRUE)
+}
 
-write.csv(results.pl, "non_invaders_power_law_results_newold.csv")
+combined_steps <- c(step.data_non_invader.x,step.data_non_invader.y)
+combined_steps <- combined_steps[combined_steps > 0]
+
+all.steps.non.invaders <- append(all.steps.non.invaders, combined_steps)
+}
+
+write.csv(all.steps.non.invaders, "all_steps_non_invaders_newold.csv")
+
+pl.ninv <- conpl$new(all.steps.non.invaders[all.steps.non.invaders>0.00001])
+tt.xmin <- estimate_xmin(pl.ninv)
+pl.ninv$setXmin(pl.ninv)
+data.pl <- data.frame(l = pl.ninv$dat, P = pl.ninv$internal$cum_n/length(pl.ninv$dat))
+write.csv(data.pl, "power_law_non_invaders_st1_st2.csv")

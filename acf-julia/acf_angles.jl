@@ -46,6 +46,7 @@ function plotacf(D)
     end
     lag = range(0, length(acfs)-1)
     acf_std = acfs[1:20] .± stds[1:20]
+    writedlm("acf-julia/acf_std_ninv1.csv", acf_std)
     plt_ninv = plot!(4*D .* lag[1:20], acf_std, #marker = :circle,# yscale = :log10, xscale = :log10, fontfamily = "Helvetica",
                     linecolor = :blue, markerstrokecolor = :blue,  frame = :box, yticks = -0.25:0.25:1,
                     linealpha = 1/(2),# markeralpha = 1/2, #markerstrokewidth = 0, 
@@ -65,6 +66,7 @@ function plotacf(D)
     end
     lag = range(0, length(acfs)-1)
     acf_std = acfs[1:20] .± stds[1:20]
+    writedlm("acf-julia/acf_std_ninv2.csv", acf_std)
     plt_ninv = plot!(4*D .* lag[1:20], acf_std, #marker = :circle,# yscale = :log10, xscale = :log10, fontfamily = "Helvetica",
                     linecolor = :red, markerstrokecolor = :red,  frame = :box,
                     linealpha = 1/(2),# markeralpha = 1/(2*k), #markerstrokewidth = 0, 
@@ -86,6 +88,7 @@ function plotacf(D)
     end
     lag = range(0, length(acfs)-1)
     acf_std = acfs[1:20] .± stds[1:20]
+    writedlm("acf-julia/acf_std_inv1.csv", acf_std)
     plt_inv = plot!(4*D .* lag[1:20], acf_std, #marker = :circle,# yscale = :log10, xscale = :log10, fontfamily = "Helvetica",
                     linecolor = :blue, markerstrokecolor = :blue, frame = :box, yticks = -0.25:0.25:1,
                     linealpha = 1/(2),# markeralpha = 1/(2*k), #markerstrokewidth = 0, 
@@ -106,6 +109,7 @@ function plotacf(D)
     end
     lag = range(0, length(acfs)-1)
     acf_std = acfs[1:20] .± stds[1:20]
+    writedlm("acf-julia/acf_std_inv2.csv", acf_std)
     plt_inv = plot!(4*D .* lag[1:20], acf_std, #marker = :circle,# yscale = :log10, xscale = :log10, fontfamily = "Helvetica",
                     linecolor = :red, markerstrokecolor = :red,  frame = :box, 
                     linealpha = 1/(2),# markeralpha = 1/(2*k), #markerstrokewidth = 0, 
