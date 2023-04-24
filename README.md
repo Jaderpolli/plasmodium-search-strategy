@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/561375299.svg)](https://zenodo.org/badge/latestdoi/561375299)
+
 # Project description
 
 This project contains the codes for obtaining the results of the article "Plasmodium sporozoite search strategy to locate hotspots of blood vessel invasion", with contributing authors Dr Pauline Formaglio , Dr Marina Wosniack , Dr Raphael Tromer , Mr Jaderson Polli , Mr Yuri Matos , Ms Hang Zhong , Professor Ernesto Raposo , Professor Marcos da Luz and Dr Rogerio Amino.
